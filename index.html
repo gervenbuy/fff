@@ -1,0 +1,454 @@
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Instagram, 
+  Menu, 
+  X, 
+  Maximize2, 
+  Hammer, 
+  LayoutGrid, 
+  Users, 
+  Building2, 
+  Palette,
+  ArrowRight,
+  MapPin,
+  Mail
+} from 'lucide-react';
+
+// --- Data ---
+
+const services = [
+  {
+    icon: <Palette className="w-8 h-8" />,
+    title: "框體設計",
+    desc: "針對作品風格與空間氛圍，量身打造獨一無二的邊框美學。"
+  },
+  {
+    icon: <Hammer className="w-8 h-8" />,
+    title: "代客掛圖",
+    desc: "專業水平校正與牆面材質評估，確保藝術品穩固且完美呈現。"
+  },
+  {
+    icon: <LayoutGrid className="w-8 h-8" />,
+    title: "種類齊全",
+    desc: "從立體框、油畫框到拼圖框，數百種材質樣式滿足多元需求。"
+  },
+  {
+    icon: <Building2 className="w-8 h-8" />,
+    title: "展區活動代掛",
+    desc: "藝廊、博物館級別的佈展經驗，精準呈現策展人的視覺動線。"
+  },
+  {
+    icon: <Maximize2 className="w-8 h-8" />,
+    title: "大型活動工程",
+    desc: "承接大型商業空間、飯店、公共藝術的掛畫與安裝工程。"
+  },
+  {
+    icon: <Users className="w-8 h-8" />,
+    title: "歡迎批發",
+    desc: "提供設計師、畫廊、攝影師穩定的高品質框材批發合作。"
+  }
+];
+
+const portfolio = [
+  { id: 1, src: "image_d69221.png", category: "現代藝術", title: "金燦光芒・立體裱褙", subtitle: "複合媒材 / 金屬框" },
+  { id: 2, src: "image_d69317.png", category: "拼圖/海報", title: "梵谷星夜・色鉛筆風", subtitle: "畫紙 / 原木框" },
+  { id: 3, src: "image_d6961f.png", category: "傳統書法", title: "家和萬事興・匾額", subtitle: "書法 / 中式紫檀框" },
+  { id: 4, src: "image_d6969c.png", category: "攝影作品", title: "夕陽鹽田・攝影展", subtitle: "攝影 / 經典胡桃木" },
+  { id: 5, src: "image_d692db.png", category: "現代藝術", title: "抽象肌理・流金歲月", subtitle: "油畫 / 極簡金屬框" },
+  { id: 6, src: "image_d69643.png", category: "拼圖/海報", title: "夢幻島・千片拼圖", subtitle: "拼圖 / 白色簡約框" },
+  { id: 7, src: "image_d6963e.png", category: "現代藝術", title: "綻放・色彩層次", subtitle: "壓克力彩 / 懸浮框" },
+  { id: 8, src: "image_d69240.jpg", category: "傳統書法", title: "府城・書法裝裱", subtitle: "書法 / 雕花金框" },
+  { id: 9, src: "image_d69a3e.jpg", category: "攝影作品", title: "黑白光影・細節特寫", subtitle: "攝影 / 雙層卡紙" },
+];
+
+const categories = ["全部", "現代藝術", "傳統書法", "攝影作品", "拼圖/海報"];
+
+// --- Components ---
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: "關於我們", href: "#about" },
+    { name: "服務項目", href: "#services" },
+    { name: "精選案例", href: "#portfolio" },
+    { name: "聯絡我們", href: "#contact" },
+  ];
+
+  return (
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-sm shadow-md py-4' : 'bg-transparent py-6'}`}>
+      <div className="container mx-auto px-6 flex justify-between items-center">
+        <a href="#" className={`text-2xl font-serif font-bold tracking-widest ${scrolled ? 'text-stone-800' : 'text-stone-800 md:text-white'}`}>
+          FFF INSTITUTE
+        </a>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex space-x-8">
+          {navLinks.map((link) => (
+            <a 
+              key={link.name} 
+              href={link.href}
+              className={`text-sm tracking-widest hover:text-yellow-600 transition-colors ${scrolled ? 'text-stone-600' : 'text-stone-200'}`}
+            >
+              {link.name}
+            </a>
+          ))}
+          <a href="https://www.instagram.com/_fff.institute_/" target="_blank" rel="noreferrer">
+            <Instagram className={`w-5 h-5 hover:text-yellow-600 transition-colors ${scrolled ? 'text-stone-600' : 'text-stone-200'}`} />
+          </a>
+        </div>
+
+        {/* Mobile Toggle */}
+        <button className="md:hidden text-stone-800" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <X /> : <Menu />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-full left-0 w-full bg-white shadow-lg md:hidden"
+          >
+            <div className="flex flex-col items-center py-8 space-y-6">
+              {navLinks.map((link) => (
+                <a 
+                  key={link.name} 
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-stone-800 text-lg tracking-widest font-serif"
+                >
+                  {link.name}
+                </a>
+              ))}
+              <a href="https://www.instagram.com/_fff.institute_/" target="_blank" rel="noreferrer" className="text-stone-800">
+                <Instagram className="w-6 h-6" />
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
+};
+
+const Hero = () => {
+  return (
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="https://i.meee.com.tw/NakgBxu.png" 
+          alt="Art Background" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-stone-900/60 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-black/30" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-stone-200 text-lg md:text-xl tracking-[0.3em] mb-4 uppercase font-light">
+            Professional Framing & Installation
+          </h2>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-8 leading-tight">
+            每一幅畫，<br className="md:hidden" />都值得最好的歸宿。
+          </h1>
+          <p className="text-stone-300 text-base md:text-lg mb-10 tracking-wider font-light max-w-2xl mx-auto">
+            FFF Institute 專注於框體設計、展覽代掛與大型活動工程。<br/>
+            讓藝術品不僅是裝飾，更是空間的靈魂。
+          </p>
+          
+          <div className="flex flex-col md:flex-row gap-4 justify-center">
+            <a 
+              href="#portfolio"
+              className="px-8 py-3 bg-white text-stone-900 font-medium tracking-widest hover:bg-stone-200 transition-colors"
+            >
+              瀏覽作品
+            </a>
+            <a 
+              href="#contact"
+              className="px-8 py-3 border border-white text-white font-medium tracking-widest hover:bg-white hover:text-stone-900 transition-colors"
+            >
+              預約諮詢
+            </a>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const About = () => {
+  return (
+    <section id="about" className="py-20 md:py-32 bg-stone-50">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+          <div className="w-full md:w-1/2">
+            <img 
+              src="image_d69a3e.jpg" 
+              alt="Craftsmanship Details" 
+              className="w-full h-[500px] object-cover shadow-2xl grayscale hover:grayscale-0 transition-all duration-700"
+            />
+          </div>
+          <div className="w-full md:w-1/2">
+            <h3 className="text-yellow-700 text-sm font-bold tracking-widest mb-2 uppercase">About Us</h3>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-6">
+              匠心工藝，<br />打造空間的視覺焦點
+            </h2>
+            <div className="w-20 h-1 bg-yellow-700 mb-8" />
+            <p className="text-stone-600 leading-relaxed mb-6 font-light">
+              FFF Institute 成立以來，致力於將「裱框」提升至藝術層次。我們深知，合適的框體設計不僅能保護作品，更能引導觀者的視線，昇華作品的內涵。
+            </p>
+            <p className="text-stone-600 leading-relaxed mb-8 font-light">
+              無論是珍貴的傳家書法、現代抽象畫作，或是大型展覽的動線規劃，我們都以最嚴謹的職人精神，為您提供一站式的專業服務。
+            </p>
+            
+            <ul className="space-y-3 mb-8">
+              {['專業無酸裝裱', '展覽動線規劃', '特殊尺寸訂製'].map(item => (
+                <li key={item} className="flex items-center text-stone-700 font-medium">
+                  <ArrowRight className="w-4 h-4 text-yellow-700 mr-2" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Services = () => {
+  return (
+    <section id="services" className="py-20 md:py-32 bg-stone-900 text-white">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">專業服務項目</h2>
+          <p className="text-stone-400 font-light tracking-wider">全方位的藝術解決方案</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, index) => (
+            <motion.div 
+              key={index}
+              whileHover={{ y: -10 }}
+              className="p-8 border border-stone-800 bg-stone-800/30 hover:bg-stone-800 transition-colors group"
+            >
+              <div className="text-yellow-600 mb-6 group-hover:text-yellow-500 transition-colors">
+                {service.icon}
+              </div>
+              <h3 className="text-xl font-serif font-semibold mb-3 tracking-wide">{service.title}</h3>
+              <p className="text-stone-400 font-light leading-relaxed text-sm">
+                {service.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Portfolio = () => {
+  const [filter, setFilter] = useState("全部");
+
+  const filteredItems = filter === "全部" 
+    ? portfolio 
+    : portfolio.filter(item => item.category === filter);
+
+  return (
+    <section id="portfolio" className="py-20 md:py-32 bg-white">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-4">精選案例</h2>
+          <div className="flex flex-wrap justify-center gap-4 mt-8">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setFilter(cat)}
+                className={`px-6 py-2 text-sm tracking-widest transition-all rounded-full ${
+                  filter === cat 
+                    ? 'bg-stone-900 text-white shadow-lg' 
+                    : 'bg-stone-100 text-stone-500 hover:bg-stone-200'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <motion.div 
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <AnimatePresence>
+            {filteredItems.map((item) => (
+              <motion.div
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+                key={item.id}
+                className="group cursor-pointer"
+              >
+                <div className="relative overflow-hidden aspect-[4/3] bg-stone-200">
+                  <img 
+                    src={item.src} 
+                    alt={item.title} 
+                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <p className="text-white tracking-widest border border-white px-4 py-2 text-sm">查看詳情</p>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <span className="text-yellow-700 text-xs font-bold tracking-wider uppercase">{item.category}</span>
+                  <h3 className="text-lg font-serif font-bold text-stone-900 mt-1">{item.title}</h3>
+                  <p className="text-stone-500 text-sm mt-1 font-light">{item.subtitle}</p>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const Contact = () => {
+  return (
+    <section id="contact" className="py-20 md:py-32 bg-stone-900 text-stone-300 relative overflow-hidden">
+      {/* Decorative large text */}
+      <div className="absolute top-10 left-0 text-[10rem] md:text-[20rem] font-serif font-bold text-white/5 pointer-events-none leading-none select-none">
+        FFF
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row gap-16">
+          <div className="w-full lg:w-5/12">
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6">
+              開始您的<br />藝術之旅
+            </h2>
+            <p className="text-stone-400 font-light leading-relaxed mb-10">
+              有作品需要裝裱嗎？或是展覽需要協助？<br />
+              歡迎填寫右側表單，或透過 Instagram 與我們聯繫。<br />
+              我們會盡快安排專人為您服務。
+            </p>
+
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <MapPin className="w-6 h-6 text-yellow-600 mt-1" />
+                <div>
+                  <h4 className="text-white font-serif mb-1">Studio Location</h4>
+                  <p className="text-stone-400 text-sm">台北市 (詳細地址請預約)</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <Mail className="w-6 h-6 text-yellow-600 mt-1" />
+                <div>
+                  <h4 className="text-white font-serif mb-1">Email Us</h4>
+                  <p className="text-stone-400 text-sm">contact@fff-institute.com</p>
+                </div>
+              </div>
+              <a 
+                href="https://www.instagram.com/_fff.institute_/" 
+                target="_blank" 
+                rel="noreferrer"
+                className="flex items-center gap-4 group"
+              >
+                <div className="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center group-hover:bg-gradient-to-tr from-yellow-500 to-purple-600 transition-all">
+                  <Instagram className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h4 className="text-white font-serif group-hover:text-yellow-500 transition-colors">Follow on Instagram</h4>
+                  <p className="text-stone-400 text-sm">@_fff.institute_</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div className="w-full lg:w-7/12 bg-white/5 p-8 md:p-12 backdrop-blur-sm border border-white/10">
+            <form className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-xs uppercase tracking-widest text-stone-500">姓名</label>
+                  <input type="text" className="w-full bg-stone-800 border border-stone-700 p-3 text-white focus:outline-none focus:border-yellow-600 transition-colors" placeholder="您的稱呼" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs uppercase tracking-widest text-stone-500">電話</label>
+                  <input type="tel" className="w-full bg-stone-800 border border-stone-700 p-3 text-white focus:outline-none focus:border-yellow-600 transition-colors" placeholder="09xx-xxx-xxx" />
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-xs uppercase tracking-widest text-stone-500">需求類別</label>
+                <select className="w-full bg-stone-800 border border-stone-700 p-3 text-white focus:outline-none focus:border-yellow-600 transition-colors">
+                  <option>個人裱框服務</option>
+                  <option>展覽代掛工程</option>
+                  <option>商業空間/大量批發</option>
+                  <option>其他合作諮詢</option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs uppercase tracking-widest text-stone-500">訊息內容</label>
+                <textarea rows="4" className="w-full bg-stone-800 border border-stone-700 p-3 text-white focus:outline-none focus:border-yellow-600 transition-colors" placeholder="請簡述您的作品尺寸、數量或特殊需求..."></textarea>
+              </div>
+
+              <button type="button" className="w-full bg-yellow-700 text-white py-4 font-bold tracking-widest hover:bg-yellow-600 transition-colors">
+                發送諮詢
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Footer = () => {
+  return (
+    <footer className="bg-stone-950 text-stone-600 py-8 border-t border-stone-900">
+      <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-xs tracking-widest">
+        <p>&copy; {new Date().getFullYear()} FFF INSTITUTE. All rights reserved.</p>
+        <div className="flex space-x-6 mt-4 md:mt-0">
+          <a href="#" className="hover:text-stone-400 transition-colors">Privacy Policy</a>
+          <a href="#" className="hover:text-stone-400 transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default function App() {
+  return (
+    <div className="font-sans antialiased bg-stone-50 selection:bg-yellow-200 selection:text-yellow-900">
+      <Navbar />
+      <Hero />
+      <About />
+      <Services />
+      <Portfolio />
+      <Contact />
+      <Footer />
+    </div>
+  );
+}
