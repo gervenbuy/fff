@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FFF•INSTITUTE｜框藝研究所｜自由搭配｜框出時尚</title>
+    <title>FFF Institute V5｜案例分享</title>
     <link rel="icon" type="image/png" href="https://i.meee.com.tw/tGZ7PHY.png">
     <link rel="apple-touch-icon" href="https://i.meee.com.tw/tGZ7PHY.png">
     <meta name="theme-color" content="#1c1917">
@@ -204,6 +204,55 @@
         .floating-line { position:fixed; right:22px; bottom:22px; z-index:45; width:58px; height:58px; border-radius:999px; display:flex; align-items:center; justify-content:center; background:#06c755; color:white; box-shadow:0 14px 35px rgba(0,0,0,.25); transition:transform .3s ease, box-shadow .3s ease; }
         .floating-line:hover { transform:translateY(-4px) scale(1.03); box-shadow:0 18px 42px rgba(0,0,0,.32); }
         @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; } }
+
+        /* V5 Google Sheet case-study CMS */
+        .case-search-wrap { width:min(100%,340px); height:46px; display:flex; align-items:center; gap:10px; padding:0 16px; border:1px solid #e7e5e4; background:#fafaf9; transition:.25s ease; }
+        .case-search-wrap:focus-within { background:#fff; border-color:#a16207; box-shadow:0 0 0 3px rgba(161,98,7,.08); }
+        .case-search-wrap svg { color:#78716c; flex:none; }
+        .case-search-wrap input { width:100%; outline:none; background:transparent; color:#292524; font-size:14px; }
+        .case-filter { padding:10px 17px; border:1px solid #e7e5e4; color:#78716c; background:#fff; font-size:13px; letter-spacing:.08em; transition:.25s ease; }
+        .case-filter:hover { color:#1c1917; border-color:#a8a29e; }
+        .case-filter.is-active { color:#fff; background:#1c1917; border-color:#1c1917; box-shadow:0 8px 22px rgba(28,25,23,.14); }
+        .case-status { margin-top:36px; padding:28px; border:1px dashed #d6d3d1; background:#fafaf9; color:#78716c; text-align:center; line-height:1.9; }
+        .case-card { position:relative; background:#fff; border:1px solid #eeeae5; overflow:hidden; cursor:pointer; transition:transform .4s ease,box-shadow .4s ease,border-color .4s ease; }
+        .case-card:hover { transform:translateY(-7px); border-color:#d6d3d1; box-shadow:0 24px 55px rgba(41,37,36,.12); }
+        .case-card-media { position:relative; aspect-ratio:4/3; overflow:hidden; background:#f5f5f4; }
+        .case-card-media img { width:100%; height:100%; object-fit:cover; transition:transform .75s cubic-bezier(.2,.7,.2,1); }
+        .case-card:hover .case-card-media img { transform:scale(1.06); }
+        .case-card-overlay { position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:flex-end; padding:18px; background:linear-gradient(to top,rgba(0,0,0,.36),transparent 52%); opacity:0; transition:.35s ease; }
+        .case-card:hover .case-card-overlay { opacity:1; }
+        .case-card-view { color:#fff; border:1px solid rgba(255,255,255,.7); padding:8px 13px; font-size:12px; letter-spacing:.15em; backdrop-filter:blur(6px); }
+        .case-featured { position:absolute; left:15px; top:15px; z-index:2; padding:7px 10px; background:rgba(255,255,255,.92); color:#92400e; font-size:11px; letter-spacing:.14em; box-shadow:0 5px 18px rgba(0,0,0,.1); }
+        .case-card-body { padding:23px 23px 25px; }
+        .case-card-category { color:#a16207; font-size:11px; font-weight:700; letter-spacing:.19em; text-transform:uppercase; }
+        .case-card-title { margin-top:8px; color:#1c1917; font-family:'Noto Serif TC',serif; font-size:21px; font-weight:700; line-height:1.5; }
+        .case-card-subtitle { margin-top:7px; color:#78716c; font-size:14px; line-height:1.7; min-height:24px; }
+        .case-card-meta { margin-top:17px; padding-top:15px; border-top:1px solid #f0eeeb; display:flex; flex-wrap:wrap; gap:8px 15px; color:#a8a29e; font-size:12px; }
+        .case-pagination-button { min-width:42px; height:42px; padding:0 13px; border:1px solid #e7e5e4; background:#fff; color:#57534e; font-size:13px; transition:.2s ease; }
+        .case-pagination-button:hover:not(:disabled),.case-pagination-button.is-active { background:#1c1917; border-color:#1c1917; color:#fff; }
+        .case-pagination-button:disabled { opacity:.35; cursor:not-allowed; }
+        .case-modal { position:fixed; inset:0; z-index:90; opacity:0; visibility:hidden; transition:.28s ease; }
+        .case-modal.is-visible { opacity:1; visibility:visible; }
+        .case-modal-backdrop { position:absolute; inset:0; background:rgba(12,10,9,.82); backdrop-filter:blur(9px); }
+        .case-modal-panel { position:absolute; inset:3vh max(2vw,12px); max-width:1280px; margin:auto; overflow-y:auto; background:#fff; box-shadow:0 35px 90px rgba(0,0,0,.35); transform:translateY(18px); transition:.32s ease; }
+        .case-modal.is-visible .case-modal-panel { transform:translateY(0); }
+        .case-modal-close { position:fixed; z-index:4; top:calc(3vh + 16px); right:max(calc((100vw - 1280px)/2 + 18px),30px); width:46px; height:46px; display:grid; place-items:center; background:rgba(255,255,255,.9); color:#292524; box-shadow:0 8px 25px rgba(0,0,0,.16); }
+        .case-modal-gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:2px; background:#e7e5e4; }
+        .case-modal-gallery img { width:100%; height:440px; object-fit:cover; background:#f5f5f4; }
+        .case-modal-gallery img:first-child:last-child { grid-column:1/-1; height:min(68vh,680px); }
+        .case-modal-gallery img:first-child:nth-last-child(3) { grid-column:1/-1; height:min(62vh,620px); }
+        .case-modal-content { max-width:920px; margin:auto; padding:55px 32px 70px; }
+        .case-meta-grid { margin-top:34px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border-top:1px solid #e7e5e4; border-left:1px solid #e7e5e4; }
+        .case-meta-item { padding:18px 20px; border-right:1px solid #e7e5e4; border-bottom:1px solid #e7e5e4; }
+        .case-meta-label { display:block; color:#a8a29e; font-size:11px; letter-spacing:.16em; }
+        .case-meta-value { display:block; margin-top:7px; color:#292524; font-size:15px; }
+        .case-description { margin-top:34px; color:#57534e; line-height:2.05; white-space:pre-line; }
+        .case-share-button { padding:11px 17px; border:1px solid #d6d3d1; color:#57534e; font-size:13px; letter-spacing:.08em; transition:.2s ease; }
+        .case-share-button:hover { border-color:#1c1917; background:#1c1917; color:#fff; }
+        body.case-modal-open { overflow:hidden; }
+        @media(max-width:767px){
+            .case-modal-panel{inset:8px}.case-modal-close{position:absolute;top:14px;right:14px}.case-modal-gallery{grid-template-columns:1fr}.case-modal-gallery img,.case-modal-gallery img:first-child:nth-last-child(3){grid-column:auto;height:300px}.case-modal-gallery img:first-child:last-child{height:360px}.case-modal-content{padding:38px 21px 52px}.case-meta-grid{grid-template-columns:1fr}.case-card-overlay{opacity:1;background:linear-gradient(to top,rgba(0,0,0,.25),transparent 45%)}
+        }
     </style>
 </head>
 <body class="bg-stone-50 selection:bg-yellow-200 selection:text-yellow-900 overflow-x-hidden">
@@ -440,29 +489,32 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
+    <!-- Case Studies Section -->
     <section id="portfolio" class="py-20 md:py-32 bg-white">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-12 reveal">
-                <h3 class="text-yellow-700 text-xs font-bold tracking-[0.3em] mb-3 uppercase">Featured Works</h3>
-                <h2 class="text-3xl md:text-4xl font-serif font-bold text-stone-900">精選作品</h2>
-
-                <!-- Filter Buttons -->
-                <div class="flex flex-wrap justify-center gap-3 mt-10" id="portfolio-filters">
-                    <button class="filter-btn active px-6 py-2 text-sm tracking-widest transition-all rounded-full bg-stone-900 text-white shadow-lg" data-filter="全部">全部</button>
-                    <button class="filter-btn px-6 py-2 text-sm tracking-widest transition-all rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200" data-filter="藝術創作">藝術創作</button>
-                    <button class="filter-btn px-6 py-2 text-sm tracking-widest transition-all rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200" data-filter="展覽策劃">展覽策劃</button>
-                    <button class="filter-btn px-6 py-2 text-sm tracking-widest transition-all rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200" data-filter="收藏紀念">收藏紀念</button>
-                    <button class="filter-btn px-6 py-2 text-sm tracking-widest transition-all rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200" data-filter="空間美學">空間美學</button>
-                    <button class="filter-btn px-6 py-2 text-sm tracking-widest transition-all rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200" data-filter="客製專案">客製專案</button>
-                </div>
+            <div class="max-w-3xl mx-auto text-center reveal">
+                <p class="text-yellow-700 text-xs font-bold tracking-[0.3em] mb-3 uppercase">Case Studies</p>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-stone-900">案例分享</h2>
+                <p class="mt-5 text-stone-500 leading-loose font-light">從作品、框型到空間配置，查看每一件案例背後的設計思考與完成細節。</p>
             </div>
 
-            <div id="portfolio-status" class="text-center text-stone-400 text-sm mb-8 hidden"></div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14" id="portfolio-grid">
-                <!-- Javascript will populate this -->
+            <div class="mt-12 md:mt-16 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 reveal">
+                <div id="portfolio-filters" class="flex flex-wrap gap-2"></div>
+                <label class="case-search-wrap" aria-label="搜尋案例">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    <input id="case-search" type="search" placeholder="搜尋標題、框型、地點…" autocomplete="off">
+                </label>
             </div>
+
+            <div class="mt-7 flex flex-wrap items-center justify-between gap-3 text-sm">
+                <p id="portfolio-count" class="text-stone-500"></p>
+                <p class="text-stone-400 text-xs">內容由 Google Sheet 自動更新</p>
+            </div>
+
+            <div id="portfolio-status" class="case-status hidden" role="status"></div>
+            <div id="portfolio-grid" class="mt-9 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-9"></div>
+
+            <div id="portfolio-pagination" class="mt-14 flex justify-center items-center gap-2"></div>
         </div>
     </section>
 
@@ -579,20 +631,27 @@
         </div>
     </section>
 
-
-    <!-- Portfolio Lightbox -->
-    <div id="lightbox" class="fixed inset-0 z-[80] bg-black/90 opacity-0 invisible flex items-center justify-center p-5 md:p-10" role="dialog" aria-modal="true" aria-label="作品圖片預覽">
-        <button id="lightbox-close" class="absolute top-5 right-5 md:top-8 md:right-8 text-white/80 hover:text-white" aria-label="關閉圖片預覽">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </button>
-        <div class="max-w-6xl w-full text-center">
-            <img id="lightbox-image" src="" alt="" class="mx-auto w-auto max-w-full object-contain shadow-2xl">
-            <div class="mt-5 text-white">
-                <p id="lightbox-category" class="text-yellow-500 text-xs tracking-[.25em] uppercase"></p>
-                <h3 id="lightbox-title" class="font-serif text-2xl mt-2"></h3>
-                <p id="lightbox-subtitle" class="text-stone-400 text-sm mt-2"></p>
+    <!-- Case Study Detail Modal -->
+    <div id="case-modal" class="case-modal" role="dialog" aria-modal="true" aria-labelledby="case-modal-title">
+        <div class="case-modal-backdrop" data-close-modal></div>
+        <article class="case-modal-panel">
+            <button id="case-modal-close" class="case-modal-close" aria-label="關閉案例">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+            <div id="case-modal-gallery" class="case-modal-gallery"></div>
+            <div class="case-modal-content">
+                <p id="case-modal-category" class="text-yellow-700 text-xs font-bold tracking-[.25em] uppercase"></p>
+                <h2 id="case-modal-title" class="mt-3 text-3xl md:text-5xl font-serif font-bold text-stone-900 leading-tight"></h2>
+                <p id="case-modal-subtitle" class="mt-4 text-stone-500 text-lg"></p>
+                <div id="case-modal-meta" class="case-meta-grid"></div>
+                <div id="case-modal-description" class="case-description"></div>
+                <div class="mt-10 flex flex-wrap gap-3 border-t border-stone-200 pt-7">
+                    <button id="case-share-line" class="case-share-button">LINE 分享</button>
+                    <button id="case-share-facebook" class="case-share-button">Facebook 分享</button>
+                    <button id="case-copy-link" class="case-share-button">複製連結</button>
+                </div>
             </div>
-        </div>
+        </article>
     </div>
 
     <a class="floating-line" href="https://line.me/ti/p/6OjEXqP4j3" target="_blank" rel="noopener" aria-label="使用 LINE 諮詢">
@@ -612,32 +671,17 @@
 
     <!-- JavaScript for Logic -->
     <script>
-        // ============================================================
-        // Portfolio data source: Google Sheet (published to web as CSV)
-        //
-        // 設定方式：
-        // 1. 在 Google 試算表建立欄位（第一列為標題）：image, category, title, subtitle
-        //    - image    : 圖片網址（可放圖床連結，例如 i.meee.com.tw 或 Google Drive 公開連結）
-        //    - category : 需為以下其中之一 -> 藝術創作 / 展覽策劃 / 收藏紀念 / 空間美學 / 客製專案
-        //    - title    : 作品標題
-        //    - subtitle : 作品副標（媒材／框型等）
-        // 2. 檔案 > 共用 > 發布到網路 > 選擇該工作表 > 格式選 csv > 發布，複製產生的網址
-        // 3. 貼到下面 SHEET_CSV_URL 這一行的引號中
-        // ============================================================
-        const SHEET_CSV_URL = ""; // <-- 請貼上「發布到網路」產生的 CSV 連結
-
-        // Fallback demo data (used only if SHEET_CSV_URL is empty or fetch fails)
-        const fallbackPortfolioData = [
-            { image: "image_d69221.png", category: "藝術創作", title: "金燦光芒・立體裱褙", subtitle: "複合媒材 / 金屬框" },
-            { image: "image_d6961f.png", category: "收藏紀念", title: "家和萬事興・匾額", subtitle: "書法 / 中式紫檀框" },
-            { image: "image_d6969c.png", category: "展覽策劃", title: "夕陽鹽田・攝影展", subtitle: "攝影 / 經典胡桃木" },
-        ];
+        const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/171E1DNnD-Dw7d-vzsuadclOaDTQtirinhx_2TZo2qhc/export?format=csv&gid=0";
+        const ITEMS_PER_PAGE = 9;
+        const LINE_URL = "https://line.me/ti/p/6OjEXqP4j3";
 
         let portfolioData = [];
+        let activeCategory = "全部";
+        let searchKeyword = "";
+        let currentPage = 1;
+        let currentCase = null;
 
-        // --- DOM Elements ---
         const navbar = document.getElementById('navbar');
-        const brandLogo = document.getElementById('brand-logo');
         const navLinks = document.querySelectorAll('.nav-link');
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -645,206 +689,233 @@
         const iconClose = document.getElementById('icon-close');
         const portfolioGrid = document.getElementById('portfolio-grid');
         const portfolioStatus = document.getElementById('portfolio-status');
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImage = document.getElementById('lightbox-image');
-        const lightboxCategory = document.getElementById('lightbox-category');
-        const lightboxTitle = document.getElementById('lightbox-title');
-        const lightboxSubtitle = document.getElementById('lightbox-subtitle');
-        const lightboxClose = document.getElementById('lightbox-close');
+        const portfolioCount = document.getElementById('portfolio-count');
+        const portfolioFilters = document.getElementById('portfolio-filters');
+        const portfolioPagination = document.getElementById('portfolio-pagination');
+        const caseSearch = document.getElementById('case-search');
+        const caseModal = document.getElementById('case-modal');
 
-        // --- Functions ---
-
-        // 1. Update Copyright Year
         document.getElementById('copyright').innerHTML = `&copy; ${new Date().getFullYear()} FFF INSTITUTE. All rights reserved.`;
 
-        // 2. Navbar Scroll Effect
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-white/95', 'backdrop-blur-sm', 'shadow-md', 'py-4', 'is-scrolled');
-                navbar.classList.remove('bg-transparent', 'py-6');
-                mobileMenuBtn.classList.remove('text-white');
-                mobileMenuBtn.classList.add('text-stone-800');
-                navLinks.forEach(link => {
-                    link.classList.remove('text-stone-200');
-                    link.classList.add('text-stone-600');
-                });
-            } else {
-                navbar.classList.remove('bg-white/95', 'backdrop-blur-sm', 'shadow-md', 'py-4', 'is-scrolled');
-                navbar.classList.add('bg-transparent', 'py-6');
-                mobileMenuBtn.classList.add('text-white');
-                mobileMenuBtn.classList.remove('text-stone-800');
-                navLinks.forEach(link => {
-                    link.classList.add('text-stone-200');
-                    link.classList.remove('text-stone-600');
-                });
-            }
-        });
+            const scrolled = window.scrollY > 50;
+            navbar.classList.toggle('bg-white/95', scrolled);
+            navbar.classList.toggle('backdrop-blur-sm', scrolled);
+            navbar.classList.toggle('shadow-md', scrolled);
+            navbar.classList.toggle('py-4', scrolled);
+            navbar.classList.toggle('is-scrolled', scrolled);
+            navbar.classList.toggle('bg-transparent', !scrolled);
+            navbar.classList.toggle('py-6', !scrolled);
+            mobileMenuBtn.classList.toggle('text-white', !scrolled);
+            mobileMenuBtn.classList.toggle('text-stone-800', scrolled);
+            navLinks.forEach(link => {
+                link.classList.toggle('text-stone-200', !scrolled);
+                link.classList.toggle('text-stone-600', scrolled);
+            });
+        }, {passive:true});
 
-
-        // Subtle hero image movement for a more premium feel
         const heroImage = document.querySelector('section img[alt="藝術空間背景"]');
         window.addEventListener('scroll', () => {
-            if (heroImage) {
-                const offset = Math.min(window.scrollY * 0.08, 55);
-                heroImage.style.transform = `translateY(${offset}px) scale(1.05)`;
-            }
-        }, { passive: true });
+            if (heroImage) heroImage.style.transform = `translateY(${Math.min(window.scrollY * .08,55)}px) scale(1.05)`;
+        }, {passive:true});
 
-        // 3. Mobile Menu Toggle
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
             iconMenu.classList.toggle('hidden');
             iconClose.classList.toggle('hidden');
         });
+        document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden'); iconMenu.classList.remove('hidden'); iconClose.classList.add('hidden');
+        }));
 
-        // Close mobile menu when link is clicked
-        document.querySelectorAll('.mobile-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                iconMenu.classList.remove('hidden');
-                iconClose.classList.add('hidden');
-            });
-        });
-
-        // 4. Portfolio Rendering & Filtering
-        function renderPortfolio(filter = "全部") {
-            portfolioGrid.innerHTML = ''; // Clear existing
-
-            const items = filter === "全部"
-                ? portfolioData
-                : portfolioData.filter(item => item.category === filter);
-
-            if (items.length === 0) {
-                portfolioStatus.textContent = "目前尚無此分類的作品，敬請期待。";
-                portfolioStatus.classList.remove('hidden');
-            } else {
-                portfolioStatus.classList.add('hidden');
+        const valueFrom = (row, aliases) => {
+            const keys = Object.keys(row);
+            for (const alias of aliases) {
+                const key = keys.find(k => k.trim().toLowerCase() === alias.toLowerCase());
+                if (key && String(row[key] ?? '').trim()) return String(row[key]).trim();
             }
+            return '';
+        };
+        const truthy = value => ['true','1','yes','y','是','上架','公開','首頁'].includes(String(value).trim().toLowerCase());
+        const normalizeImageUrl = url => {
+            if (!url) return '';
+            const drive = url.match(/drive\.google\.com\/file\/d\/([^/]+)/);
+            if (drive) return `https://drive.google.com/uc?export=view&id=${drive[1]}`;
+            const open = url.match(/[?&]id=([^&]+)/);
+            if (url.includes('drive.google.com') && open) return `https://drive.google.com/uc?export=view&id=${open[1]}`;
+            return url;
+        };
+        const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[c]));
 
-            items.forEach(item => {
-                const card = document.createElement('div');
-                card.className = "group cursor-pointer reveal active"; // Added reveal class for animation
+        function normalizeRow(row, index) {
+            const publishedRaw = valueFrom(row,['上架','published','status','公開']);
+            const images = [
+                valueFrom(row,['封面','封面圖片','image','cover']),
+                valueFrom(row,['作品照片1','圖片1','image1','photo1']),
+                valueFrom(row,['作品照片2','圖片2','image2','photo2']),
+                valueFrom(row,['作品照片3','圖片3','image3','photo3']),
+                valueFrom(row,['作品照片4','圖片4','image4','photo4'])
+            ].map(normalizeImageUrl).filter(Boolean);
+            return {
+                id: valueFrom(row,['id','編號']) || String(index + 1),
+                category: valueFrom(row,['分類','category']) || '其他案例',
+                title: valueFrom(row,['標題','title','案例名稱']),
+                subtitle: valueFrom(row,['副標','subtitle','作品副標']),
+                images,
+                image: images[0] || '',
+                client: valueFrom(row,['客戶','client']),
+                size: valueFrom(row,['尺寸','size']),
+                frame: valueFrom(row,['框型','frame','材料']),
+                location: valueFrom(row,['地點','location']),
+                date: valueFrom(row,['日期','date','完工日期']),
+                description: valueFrom(row,['說明','description','內容','案例說明']),
+                featured: truthy(valueFrom(row,['是否首頁','featured','精選'])),
+                published: !publishedRaw || truthy(publishedRaw)
+            };
+        }
+
+        function buildFilters() {
+            const categories = ['全部', ...new Set(portfolioData.map(item => item.category).filter(Boolean))];
+            portfolioFilters.innerHTML = categories.map(cat => `<button class="case-filter${cat===activeCategory?' is-active':''}" data-category="${escapeHtml(cat)}">${escapeHtml(cat)}</button>`).join('');
+            portfolioFilters.querySelectorAll('button').forEach(button => button.addEventListener('click', () => {
+                activeCategory = button.dataset.category; currentPage = 1; buildFilters(); renderPortfolio();
+            }));
+        }
+
+        function filteredItems() {
+            const q = searchKeyword.toLowerCase();
+            return portfolioData.filter(item => {
+                const categoryMatch = activeCategory === '全部' || item.category === activeCategory;
+                const haystack = [item.title,item.subtitle,item.category,item.client,item.size,item.frame,item.location,item.date,item.description].join(' ').toLowerCase();
+                return categoryMatch && (!q || haystack.includes(q));
+            });
+        }
+
+        function renderPortfolio() {
+            const allItems = filteredItems();
+            const totalPages = Math.max(1, Math.ceil(allItems.length / ITEMS_PER_PAGE));
+            currentPage = Math.min(currentPage,totalPages);
+            const pageItems = allItems.slice((currentPage-1)*ITEMS_PER_PAGE,currentPage*ITEMS_PER_PAGE);
+            portfolioCount.textContent = allItems.length ? `共 ${allItems.length} 件案例` : '';
+            portfolioGrid.innerHTML = '';
+            portfolioStatus.classList.toggle('hidden', allItems.length > 0);
+            if (!allItems.length) {
+                portfolioStatus.innerHTML = '目前沒有符合條件的案例。<br>請更換分類或搜尋關鍵字。';
+            }
+            pageItems.forEach(item => {
+                const card = document.createElement('article');
+                card.className = 'case-card reveal active';
+                card.tabIndex = 0;
+                card.setAttribute('aria-label',`查看案例：${item.title}`);
                 card.innerHTML = `
-                    <div class="relative overflow-hidden aspect-[4/3] bg-stone-200">
-                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <p class="text-white tracking-widest border border-white px-4 py-2 text-sm">查看詳情</p>
+                    <div class="case-card-media">
+                        ${item.featured ? '<span class="case-featured">FEATURED 精選</span>' : ''}
+                        <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy" onerror="this.src='https://placehold.co/1200x900/f5f5f4/78716c?text=FFF+INSTITUTE'">
+                        <div class="case-card-overlay"><span class="case-card-view">VIEW CASE</span></div>
+                    </div>
+                    <div class="case-card-body">
+                        <p class="case-card-category">${escapeHtml(item.category)}</p>
+                        <h3 class="case-card-title">${escapeHtml(item.title)}</h3>
+                        <p class="case-card-subtitle">${escapeHtml(item.subtitle || item.description.slice(0,55))}</p>
+                        <div class="case-card-meta">
+                            ${item.frame?`<span>${escapeHtml(item.frame)}</span>`:''}
+                            ${item.location?`<span>${escapeHtml(item.location)}</span>`:''}
+                            ${item.date?`<span>${escapeHtml(item.date)}</span>`:''}
                         </div>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-yellow-700 text-xs font-bold tracking-wider uppercase">${item.category}</span>
-                        <h3 class="text-lg font-serif font-bold text-stone-900 mt-1">${item.title}</h3>
-                        <p class="text-stone-500 text-sm mt-1 font-light">${item.subtitle}</p>
-                    </div>
-                `;
-                card.addEventListener('click', () => openLightbox(item));
+                    </div>`;
+                card.addEventListener('click',()=>openCase(item));
+                card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openCase(item)}});
                 portfolioGrid.appendChild(card);
             });
-
-            // Re-trigger scroll animations for new elements
+            renderPagination(totalPages);
             observeElements();
         }
 
-        function openLightbox(item) {
-            lightboxImage.src = item.image;
-            lightboxImage.alt = item.title || '作品圖片';
-            lightboxCategory.textContent = item.category || '';
-            lightboxTitle.textContent = item.title || '';
-            lightboxSubtitle.textContent = item.subtitle || '';
-            lightbox.classList.add('is-visible');
-            document.body.classList.add('lightbox-open');
-        }
-
-        function closeLightbox() {
-            lightbox.classList.remove('is-visible');
-            document.body.classList.remove('lightbox-open');
-        }
-
-        lightboxClose.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', (event) => {
-            if (event.target === lightbox) closeLightbox();
-        });
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape') closeLightbox();
-        });
-
-        // Contact form opens LINE with pre-filled consultation details
-        document.getElementById('contact-form').addEventListener('submit', (event) => {
-            event.preventDefault();
-            const name = document.getElementById('contact-name').value.trim();
-            const phone = document.getElementById('contact-phone').value.trim();
-            const category = document.getElementById('contact-category').value;
-            const message = document.getElementById('contact-message').value.trim();
-            const text = `您好，我想預約 FFF•INSTITUTE 諮詢。\n姓名：${name || '未填'}\n電話：${phone || '未填'}\n需求：${category}\n內容：${message || '未填'}`;
-            window.open(`https://line.me/R/msg/text/?${encodeURIComponent(text)}`, '_blank', 'noopener');
-        });
-
-        // Load portfolio data from Google Sheet CSV, fallback to demo data
-        function loadPortfolioData() {
-            if (!SHEET_CSV_URL) {
-                portfolioData = fallbackPortfolioData;
-                portfolioStatus.textContent = "尚未連接 Google Sheet，目前顯示示範資料。";
-                portfolioStatus.classList.remove('hidden');
-                renderPortfolio();
-                return;
+        function renderPagination(totalPages) {
+            if (totalPages <= 1) { portfolioPagination.innerHTML=''; return; }
+            let html = `<button class="case-pagination-button" data-page="${currentPage-1}" ${currentPage===1?'disabled':''}>上一頁</button>`;
+            for(let i=1;i<=totalPages;i++) {
+                if(totalPages>7 && i>2 && i<totalPages-1 && Math.abs(i-currentPage)>1){
+                    if(i===3 || i===totalPages-2) html += '<span class="px-1 text-stone-400">…</span>';
+                    continue;
+                }
+                html += `<button class="case-pagination-button${i===currentPage?' is-active':''}" data-page="${i}">${i}</button>`;
             }
+            html += `<button class="case-pagination-button" data-page="${currentPage+1}" ${currentPage===totalPages?'disabled':''}>下一頁</button>`;
+            portfolioPagination.innerHTML=html;
+            portfolioPagination.querySelectorAll('button:not(:disabled)').forEach(btn=>btn.addEventListener('click',()=>{
+                currentPage=Number(btn.dataset.page); renderPortfolio(); document.getElementById('portfolio').scrollIntoView({behavior:'smooth'});
+            }));
+        }
 
-            Papa.parse(SHEET_CSV_URL, {
-                download: true,
-                header: true,
-                skipEmptyLines: true,
-                complete: function(results) {
-                    const rows = (results.data || []).filter(r => r.title && r.image);
-                    portfolioData = rows.length > 0 ? rows : fallbackPortfolioData;
-                    renderPortfolio();
+        function openCase(item) {
+            currentCase=item;
+            const gallery=item.images.length?item.images:[item.image];
+            document.getElementById('case-modal-gallery').innerHTML=gallery.map((url,i)=>`<img src="${escapeHtml(url)}" alt="${escapeHtml(item.title)} 圖片 ${i+1}" loading="lazy">`).join('');
+            document.getElementById('case-modal-category').textContent=item.category;
+            document.getElementById('case-modal-title').textContent=item.title;
+            document.getElementById('case-modal-subtitle').textContent=item.subtitle;
+            const meta=[['客戶',item.client],['尺寸',item.size],['框型／材料',item.frame],['地點',item.location],['完工日期',item.date]].filter(x=>x[1]);
+            document.getElementById('case-modal-meta').innerHTML=meta.map(([label,value])=>`<div class="case-meta-item"><span class="case-meta-label">${label}</span><span class="case-meta-value">${escapeHtml(value)}</span></div>`).join('');
+            document.getElementById('case-modal-meta').style.display=meta.length?'grid':'none';
+            document.getElementById('case-modal-description').textContent=item.description;
+            caseModal.classList.add('is-visible'); document.body.classList.add('case-modal-open');
+            history.replaceState(null,'',`#case-${encodeURIComponent(item.id)}`);
+        }
+        function closeCase() {
+            caseModal.classList.remove('is-visible'); document.body.classList.remove('case-modal-open');
+            if(location.hash.startsWith('#case-')) history.replaceState(null,'',location.pathname+location.search+'#portfolio');
+        }
+        document.getElementById('case-modal-close').addEventListener('click',closeCase);
+        document.querySelector('[data-close-modal]').addEventListener('click',closeCase);
+        document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCase()});
+        const shareUrl=()=>`${location.origin}${location.pathname}${location.search}#case-${encodeURIComponent(currentCase?.id||'')}`;
+        document.getElementById('case-share-line').addEventListener('click',()=>window.open(`https://line.me/R/msg/text/?${encodeURIComponent((currentCase?.title||'FFF Institute 案例')+' '+shareUrl())}`,'_blank','noopener'));
+        document.getElementById('case-share-facebook').addEventListener('click',()=>window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl())}`,'_blank','noopener'));
+        document.getElementById('case-copy-link').addEventListener('click',async e=>{await navigator.clipboard.writeText(shareUrl());e.currentTarget.textContent='已複製';setTimeout(()=>e.currentTarget.textContent='複製連結',1500)});
+
+        caseSearch.addEventListener('input',e=>{searchKeyword=e.target.value.trim();currentPage=1;renderPortfolio()});
+
+        document.getElementById('contact-form').addEventListener('submit', event => {
+            event.preventDefault();
+            const text=`您好，我想預約 FFF•INSTITUTE 諮詢。
+姓名：${document.getElementById('contact-name').value.trim()||'未填'}
+電話：${document.getElementById('contact-phone').value.trim()||'未填'}
+需求：${document.getElementById('contact-category').value}
+內容：${document.getElementById('contact-message').value.trim()||'未填'}`;
+            window.open(`https://line.me/R/msg/text/?${encodeURIComponent(text)}`,'_blank','noopener');
+        });
+
+        function loadPortfolioData() {
+            portfolioStatus.classList.remove('hidden');
+            portfolioStatus.textContent='案例載入中…';
+            Papa.parse(SHEET_CSV_URL,{
+                download:true,header:true,skipEmptyLines:'greedy',
+                complete(results){
+                    portfolioData=(results.data||[]).map(normalizeRow).filter(item=>item.published&&item.title&&item.image);
+                    portfolioData.sort((a,b)=>Number(b.featured)-Number(a.featured));
+                    if(!portfolioData.length){
+                        portfolioStatus.innerHTML='Google Sheet 已連接，但尚未讀到可上架的案例。<br>請確認第一列包含「標題、分類、封面」欄位，且圖片網址可公開瀏覽。';
+                    } else portfolioStatus.classList.add('hidden');
+                    buildFilters();renderPortfolio();openCaseFromHash();
                 },
-                error: function() {
-                    portfolioData = fallbackPortfolioData;
-                    portfolioStatus.textContent = "無法讀取 Google Sheet，目前顯示示範資料。";
+                error(){
                     portfolioStatus.classList.remove('hidden');
-                    renderPortfolio();
+                    portfolioStatus.innerHTML='暫時無法讀取 Google Sheet。<br>請確認試算表已設定為「知道連結的任何人都可查看」。';
                 }
             });
         }
-
-        // Initialize Portfolio
-        loadPortfolioData();
-
-        // Handle Filter Clicks
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                // Remove active class from all
-                filterBtns.forEach(b => {
-                    b.classList.remove('bg-stone-900', 'text-white', 'shadow-lg');
-                    b.classList.add('bg-stone-100', 'text-stone-500', 'hover:bg-stone-200');
-                });
-                // Add active class to clicked
-                e.target.classList.remove('bg-stone-100', 'text-stone-500', 'hover:bg-stone-200');
-                e.target.classList.add('bg-stone-900', 'text-white', 'shadow-lg');
-
-                renderPortfolio(e.target.getAttribute('data-filter'));
-            });
-        });
-
-        // 5. Scroll Animations (Intersection Observer)
-        function observeElements() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, {
-                threshold: 0.1 // Trigger when 10% visible
-            });
-
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        function openCaseFromHash(){
+            if(!location.hash.startsWith('#case-'))return;
+            const id=decodeURIComponent(location.hash.slice(6));
+            const item=portfolioData.find(x=>x.id===id);if(item)openCase(item);
         }
 
-        // Start observing on load
-        document.addEventListener('DOMContentLoaded', observeElements);
-
+        function observeElements(){
+            const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('active')}),{threshold:.1});
+            document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+        }
+        document.addEventListener('DOMContentLoaded',()=>{observeElements();loadPortfolioData()});
     </script>
 </body>
 </html>
