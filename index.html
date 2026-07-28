@@ -3,13 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FFF Institute | 專業裱框・空間美學事務所</title>
-    
+    <title>FFF•INSTITUTE｜框藝研究所｜自由搭配｜框出時尚</title>
+    <link rel="icon" type="image/png" href="https://i.meee.com.tw/tGZ7PHY.png">
+    <link rel="apple-touch-icon" href="https://i.meee.com.tw/tGZ7PHY.png">
+    <meta name="theme-color" content="#1c1917">
+    <meta name="description" content="FFF•INSTITUTE 框藝研究所｜客製化裱框、展覽規劃、專業掛圖、空間美學與材料供應。">
+    <meta property="og:title" content="FFF•INSTITUTE｜框藝研究所">
+    <meta property="og:description" content="不只是裱框，更是空間美學與生活風格的延伸。">
+    <meta property="og:image" content="https://i.meee.com.tw/tGZ7PHY.png">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;900&display=swap" rel="stylesheet">
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -24,6 +31,9 @@
             }
         }
     </script>
+
+    <!-- PapaParse for Google Sheet (CSV) driven portfolio -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <style>
         /* Custom Styles for Animations */
@@ -49,6 +59,151 @@
         .reveal-delay-100 { transition-delay: 0.1s; }
         .reveal-delay-200 { transition-delay: 0.2s; }
         .reveal-delay-300 { transition-delay: 0.3s; }
+
+        /* Premium brand refinements */
+        #navbar {
+            border-bottom: 1px solid transparent;
+        }
+        #navbar.is-scrolled {
+            border-bottom-color: rgba(120, 113, 108, 0.16);
+        }
+        .brand-logo-image {
+            width: auto;
+            height: 44px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 18px rgba(0,0,0,.22));
+            transition: transform .35s ease, filter .35s ease, height .35s ease;
+        }
+        #brand-logo:hover .brand-logo-image {
+            transform: scale(1.04);
+            filter: drop-shadow(0 10px 24px rgba(0,0,0,.28));
+        }
+        #navbar.is-scrolled .brand-logo-image {
+            height: 38px;
+            filter: drop-shadow(0 5px 12px rgba(0,0,0,.12));
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 100%;
+            height: 1px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform .3s ease;
+            opacity: .55;
+        }
+        .nav-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        .about-section {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 18% 48%, rgba(161, 98, 7, .09), transparent 27%),
+                linear-gradient(180deg, #fbfaf7 0%, #f7f5f0 100%);
+        }
+        .about-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image: linear-gradient(rgba(120,113,108,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(120,113,108,.035) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(to right, black, transparent 68%);
+        }
+        .about-logo-wrap {
+            position: relative;
+            min-height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            isolation: isolate;
+        }
+        .about-logo-glow {
+            position: absolute;
+            width: min(84vw, 470px);
+            aspect-ratio: 1;
+            border-radius: 9999px;
+            background: radial-gradient(circle, rgba(202,138,4,.15) 0%, rgba(202,138,4,.07) 35%, transparent 70%);
+            filter: blur(24px);
+            transform: translateY(10px);
+            z-index: -1;
+        }
+        .about-logo-image {
+            width: min(100%, 460px);
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 22px 36px rgba(28,25,23,.18));
+            transition: transform .6s cubic-bezier(.22,1,.36,1), filter .6s ease;
+            will-change: transform;
+        }
+        .about-logo-wrap:hover .about-logo-image {
+            transform: translateY(-4px) scale(1.018);
+            filter: drop-shadow(0 28px 44px rgba(28,25,23,.23));
+        }
+        .about-copy {
+            max-width: 660px;
+        }
+        .about-divider {
+            width: 96px;
+            height: 2px;
+            background: linear-gradient(90deg, #a16207 0%, rgba(161,98,7,0) 100%);
+        }
+        .about-value {
+            display: grid;
+            grid-template-columns: 34px 1fr;
+            gap: 14px;
+            align-items: start;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(120,113,108,.16);
+        }
+        .about-value:last-child { border-bottom: 0; }
+        .about-value-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(161,98,7,.32);
+            color: #a16207;
+            background: rgba(255,255,255,.55);
+        }
+        @media (max-width: 767px) {
+            .about-logo-wrap { min-height: 320px; }
+            .about-logo-image { width: min(88vw, 390px); }
+            .about-copy { max-width: none; }
+        }
+        @media (max-width: 767px) {
+            .brand-logo-image { height: 36px; }
+            #navbar.is-scrolled .brand-logo-image { height: 32px; }
+        }
+
+        /* V3 premium interactions */
+        :root { --gold: #a16207; --ink: #1c1917; }
+        body { background-image: radial-gradient(circle at 10% 10%, rgba(161,98,7,.045), transparent 28%); }
+        .hero-grain { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E"); mix-blend-mode: soft-light; opacity:.35; }
+        .premium-card { position:relative; overflow:hidden; transition: transform .45s ease, border-color .45s ease, background .45s ease, box-shadow .45s ease; }
+        .premium-card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.06),transparent 42%); pointer-events:none; }
+        .premium-card:hover { transform:translateY(-8px); border-color:rgba(202,138,4,.45); box-shadow:0 24px 60px rgba(0,0,0,.22); }
+        .hero-cta { transition:transform .3s ease, box-shadow .3s ease, background .3s ease; }
+        .hero-cta:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(0,0,0,.18); }
+        #portfolio-grid > div { transition: transform .45s ease; }
+        #portfolio-grid > div:hover { transform: translateY(-6px); }
+        .lightbox-open { overflow:hidden; }
+        #lightbox { transition:opacity .25s ease, visibility .25s ease; }
+        #lightbox.is-visible { opacity:1; visibility:visible; }
+        #lightbox img { max-height:76vh; }
+        .floating-line { position:fixed; right:22px; bottom:22px; z-index:45; width:58px; height:58px; border-radius:999px; display:flex; align-items:center; justify-content:center; background:#06c755; color:white; box-shadow:0 14px 35px rgba(0,0,0,.25); transition:transform .3s ease, box-shadow .3s ease; }
+        .floating-line:hover { transform:translateY(-4px) scale(1.03); box-shadow:0 18px 42px rgba(0,0,0,.32); }
+        @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; } }
     </style>
 </head>
 <body class="bg-stone-50 selection:bg-yellow-200 selection:text-yellow-900 overflow-x-hidden">
@@ -56,23 +211,28 @@
     <!-- Navigation -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-6">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <a href="#" id="brand-logo" class="text-2xl font-serif font-bold tracking-widest text-stone-800 md:text-white transition-colors">
-                FFF INSTITUTE
+            <a href="#" id="brand-logo" class="inline-flex items-center shrink-0" aria-label="FFF Institute 首頁">
+                <img src="https://i.meee.com.tw/tGZ7PHY.png" alt="FFF Institute 框藝研究所 Logo" class="brand-logo-image">
             </a>
 
             <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-8">
+            <div class="hidden lg:flex items-center space-x-10">
                 <a href="#about" class="nav-link text-sm tracking-widest text-stone-200 hover:text-yellow-600 transition-colors">關於我們</a>
                 <a href="#services" class="nav-link text-sm tracking-widest text-stone-200 hover:text-yellow-600 transition-colors">服務項目</a>
-                <a href="#portfolio" class="nav-link text-sm tracking-widest text-stone-200 hover:text-yellow-600 transition-colors">精選案例</a>
+                <a href="#portfolio" class="nav-link text-sm tracking-widest text-stone-200 hover:text-yellow-600 transition-colors">精選作品</a>
                 <a href="#contact" class="nav-link text-sm tracking-widest text-stone-200 hover:text-yellow-600 transition-colors">聯絡我們</a>
-                <a href="https://www.instagram.com/_fff.institute_/" target="_blank" class="nav-link text-stone-200 hover:text-yellow-600 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                </a>
+                <div class="flex items-center space-x-5 pl-2 border-l border-stone-500/40">
+                    <a href="https://www.instagram.com/_fff.institute_/" target="_blank" rel="noopener" class="nav-link text-stone-200 hover:text-yellow-600 transition-colors" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://line.me/ti/p/6OjEXqP4j3" target="_blank" rel="noopener" class="nav-link text-stone-200 hover:text-yellow-600 transition-colors" aria-label="LINE">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    </a>
+                </div>
             </div>
 
             <!-- Mobile Toggle -->
-            <button id="mobile-menu-btn" class="md:hidden text-stone-800 focus:outline-none">
+            <button id="mobile-menu-btn" class="lg:hidden text-white focus:outline-none transition-colors" aria-label="開啟選單">
                 <!-- Menu Icon -->
                 <svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
                 <!-- Close Icon (Hidden by default) -->
@@ -81,84 +241,130 @@
         </div>
 
         <!-- Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white shadow-lg md:hidden">
-            <div class="flex flex-col items-center py-8 space-y-6">
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full max-h-[80vh] overflow-y-auto bg-white shadow-lg lg:hidden">
+            <div class="flex flex-col items-center py-10 space-y-7">
                 <a href="#about" class="text-stone-800 text-lg tracking-widest font-serif mobile-link">關於我們</a>
                 <a href="#services" class="text-stone-800 text-lg tracking-widest font-serif mobile-link">服務項目</a>
-                <a href="#portfolio" class="text-stone-800 text-lg tracking-widest font-serif mobile-link">精選案例</a>
+                <a href="#portfolio" class="text-stone-800 text-lg tracking-widest font-serif mobile-link">精選作品</a>
                 <a href="#contact" class="text-stone-800 text-lg tracking-widest font-serif mobile-link">聯絡我們</a>
-                <a href="https://www.instagram.com/_fff.institute_/" target="_blank" class="text-stone-800">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                </a>
+                <div class="flex items-center gap-6 pt-4">
+                    <a href="https://www.instagram.com/_fff.institute_/" target="_blank" rel="noopener" class="text-stone-800" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://line.me/ti/p/6OjEXqP4j3" target="_blank" rel="noopener" class="text-stone-800" aria-label="LINE">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden py-32">
         <div class="absolute inset-0 z-0">
-            <img src="https://i.meee.com.tw/NakgBxu.png" alt="Art Background" class="w-full h-full object-cover">
+            <img src="https://i.meee.com.tw/NakgBxu.png" alt="藝術空間背景" class="w-full h-full object-cover scale-105">
             <div class="absolute inset-0 bg-stone-900/60 mix-blend-multiply"></div>
             <div class="absolute inset-0 bg-black/30"></div>
+            <div class="absolute inset-0 hero-grain"></div>
         </div>
 
-        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto reveal active">
-            <h2 class="text-stone-200 text-lg md:text-xl tracking-[0.3em] mb-4 uppercase font-light">
-                Professional Framing & Installation
+        <div class="relative z-10 text-center px-6 max-w-3xl mx-auto reveal active">
+            <h2 class="text-stone-300 text-xs md:text-sm tracking-[0.35em] mb-6 uppercase font-light">
+                FFF•INSTITUTE｜框藝研究所
             </h2>
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-8 leading-tight">
-                每一幅畫，<br class="md:hidden">都值得最好的歸宿。
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-8 leading-[1.3]">
+                不只是裱框，<br>更是空間美學與生活風格的延伸。
             </h1>
-            <p class="text-stone-300 text-base md:text-lg mb-10 tracking-wider font-light max-w-2xl mx-auto">
-                FFF Institute 專注於框體設計、展覽代掛與大型活動工程。<br>
-                讓藝術品不僅是裝飾，更是空間的靈魂。
+            <p class="text-stone-300 text-base md:text-lg mb-12 leading-loose font-light max-w-2xl mx-auto">
+                FFF Institute 專注於框體設計、展覽代掛與空間整合工程，並延伸至窗簾、家具與整體空間配置規劃。我們從作品比例、材質選擇到空間語境出發，建立一致的設計思考，讓藝術不只是被展示，而是與空間對話，成為場域的核心與靈魂。
             </p>
-            
-            <div class="flex flex-col md:flex-row gap-4 justify-center">
-                <a href="#portfolio" class="px-8 py-3 bg-white text-stone-900 font-medium tracking-widest hover:bg-stone-200 transition-colors">
+
+            <div class="flex flex-wrap gap-4 justify-center mb-6">
+                <a href="#portfolio" class="hero-cta px-8 py-3 bg-white text-stone-900 font-medium tracking-widest hover:bg-stone-200 transition-colors text-sm">
                     瀏覽作品
                 </a>
-                <a href="#contact" class="px-8 py-3 border border-white text-white font-medium tracking-widest hover:bg-white hover:text-stone-900 transition-colors">
+                <a href="#services" class="hero-cta px-8 py-3 border border-white/70 text-white font-medium tracking-widest hover:bg-white hover:text-stone-900 transition-colors text-sm">
+                    專業服務項目
+                </a>
+                <a href="#contact" class="hero-cta px-8 py-3 border border-white/70 text-white font-medium tracking-widest hover:bg-white hover:text-stone-900 transition-colors text-sm">
                     預約諮詢
+                </a>
+            </div>
+
+            <div class="flex flex-wrap gap-x-8 gap-y-2 justify-center text-sm tracking-wider">
+                <a href="https://line.me/ti/p/6OjEXqP4j3" target="_blank" rel="noopener" class="text-stone-300 hover:text-white underline underline-offset-4 decoration-stone-500 transition-colors">
+                    LINE 諮詢
+                </a>
+                <a href="https://line.me/ti/g2/_CS2DnBfi94bXZbtGjvhPio5kfU5Ed5FOTlTHw?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener" class="text-stone-300 hover:text-white underline underline-offset-4 decoration-stone-500 transition-colors">
+                    加入社群
                 </a>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 md:py-32 bg-stone-50">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20">
-                <div class="w-full md:w-1/2 reveal">
-                    <img src="https://i.meee.com.tw/jI70Hyp.jpg" alt="Craftsmanship Details" class="w-full h-[500px] object-cover shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
+    <section id="about" class="about-section py-24 md:py-36 lg:py-40">
+        <div class="container relative z-10 mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-[0.88fr_1.12fr] items-center gap-14 md:gap-20 lg:gap-24">
+                <div class="reveal">
+                    <div class="about-logo-wrap">
+                        <div class="about-logo-glow" aria-hidden="true"></div>
+                        <img
+                            src="https://i.meee.com.tw/tGZ7PHY.png"
+                            alt="FFF Institute 框藝研究所"
+                            class="about-logo-image"
+                            loading="lazy"
+                            decoding="async"
+                        >
+                    </div>
                 </div>
-                <div class="w-full md:w-1/2 reveal reveal-delay-200">
-                    <h3 class="text-yellow-700 text-sm font-bold tracking-widest mb-2 uppercase">About Us</h3>
-                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-6">
-                        匠心工藝，<br>打造空間的視覺焦點
+
+                <div class="about-copy reveal reveal-delay-200">
+                    <p class="mb-4 text-xs md:text-sm font-bold tracking-[0.28em] uppercase text-yellow-700">About Us</p>
+                    <h2 class="font-serif text-[2.15rem] leading-tight md:text-5xl lg:text-[3.25rem] font-bold tracking-[0.03em] text-stone-900">
+                        FREE <span class="text-yellow-700/80">•</span> FRAME <span class="text-yellow-700/80">•</span> FASHION
                     </h2>
-                    <div class="w-20 h-1 bg-yellow-700 mb-8"></div>
-                    <p class="text-stone-600 leading-relaxed mb-6 font-light">
-                        FFF Institute 成立以來，致力於將「裱框」提升至藝術層次。我們深知，合適的框體設計不僅能保護作品，更能引導觀者的視線，昇華作品的內涵。
-                    </p>
-                    <p class="text-stone-600 leading-relaxed mb-8 font-light">
-                        無論是珍貴的傳家書法、現代抽象畫作，或是大型展覽的動線規劃，我們都以最嚴謹的職人精神，為您提供一站式的專業服務。
-                    </p>
-                    
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center text-stone-700 font-medium">
-                            <svg class="w-4 h-4 text-yellow-700 mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                            專業無酸裝裱
-                        </li>
-                        <li class="flex items-center text-stone-700 font-medium">
-                            <svg class="w-4 h-4 text-yellow-700 mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                            展覽動線規劃
-                        </li>
-                        <li class="flex items-center text-stone-700 font-medium">
-                            <svg class="w-4 h-4 text-yellow-700 mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                            特殊尺寸訂製
-                        </li>
-                    </ul>
+
+                    <div class="about-divider my-8 md:my-10"></div>
+
+                    <div class="space-y-3 text-base md:text-[1.05rem] leading-[2.05] tracking-[0.025em] text-stone-600 font-light">
+                        <p>持續研究，持續學習，持續進化。</p>
+                        <p>秉持研究所精神，研究比例、研究材質，研究如何讓作品更有風格。</p>
+                        <p>不斷學習新的工法與技術，探索作品與空間之間更多可能。</p>
+                        <p>因為風格會進化，技術，也必須持續進化。</p>
+                    </div>
+
+                    <div class="mt-10 md:mt-12">
+                        <div class="about-value">
+                            <span class="about-value-icon" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                            </span>
+                            <div>
+                                <h3 class="text-sm md:text-base font-bold tracking-wide text-stone-900">FRAME</h3>
+                                <p class="mt-1 text-sm md:text-[15px] tracking-wide text-stone-600">解決框的所有問題</p>
+                            </div>
+                        </div>
+
+                        <div class="about-value">
+                            <span class="about-value-icon" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                            </span>
+                            <div>
+                                <h3 class="text-sm md:text-base font-bold tracking-wide text-stone-900">FREE</h3>
+                                <p class="mt-1 text-sm md:text-[15px] tracking-wide text-stone-600">自由搭配・客製選擇</p>
+                            </div>
+                        </div>
+
+                        <div class="about-value">
+                            <span class="about-value-icon" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                            </span>
+                            <div>
+                                <h3 class="text-sm md:text-base font-bold tracking-wide text-stone-900">FASHION</h3>
+                                <p class="mt-1 text-sm md:text-[15px] tracking-wide text-stone-600">框出風格・展現自我</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -168,58 +374,67 @@
     <section id="services" class="py-20 md:py-32 bg-stone-900 text-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16 reveal">
+                <h3 class="text-yellow-600 text-xs font-bold tracking-[0.3em] mb-3 uppercase">Professional Services</h3>
                 <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4">專業服務項目</h2>
-                <p class="text-stone-400 font-light tracking-wider">全方位的藝術解決方案</p>
+                <p class="text-stone-400 font-light tracking-wider">全方位的藝術與空間解決方案</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 <!-- Service 1 -->
-                <div class="p-8 border border-stone-800 bg-stone-800/30 hover:bg-stone-800 transition-colors group reveal">
+                <div class="premium-card p-8 border border-stone-800 bg-stone-800/30 hover:bg-stone-800 transition-colors group reveal">
                     <div class="text-yellow-600 mb-6 group-hover:text-yellow-500 transition-colors">
                         <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
                     </div>
-                    <h3 class="text-xl font-serif font-semibold mb-3 tracking-wide">框體設計</h3>
-                    <p class="text-stone-400 font-light leading-relaxed text-sm">針對作品風格與空間氛圍，量身打造獨一無二的邊框美學。</p>
+                    <div class="mb-3"><span class="text-yellow-700/70 text-xs tracking-widest">①</span><h3 class="text-xl font-serif font-semibold tracking-wide mt-1">客製化裱框</h3><p class="text-stone-500 text-xs tracking-[0.15em] uppercase mt-1">CUSTOM FRAMING</p></div>
+                    <p class="text-stone-400 font-light leading-relaxed text-sm">讓作品不只是被保存，更讓畫與框彼此成就，創造 1+1 大於 2 的美感與價值。</p>
                 </div>
                 <!-- Service 2 -->
-                <div class="p-8 border border-stone-800 bg-stone-800/30 hover:bg-stone-800 transition-colors group reveal reveal-delay-100">
-                    <div class="text-yellow-600 mb-6 group-hover:text-yellow-500 transition-colors">
-                        <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25V2.46V2.45c0-.27.2-.5.49-.5h.42c.61 0 1.12.5 1.1.11L11.7 20.91c-.38-.38-.59-.88-.59-1.41v-.42c0-.29-.23-.49-.5-.49h-.01c-.85 0-1.65-.33-2.25-.93L7.1 16.4"/></svg>
-                    </div>
-                    <h3 class="text-xl font-serif font-semibold mb-3 tracking-wide">代客掛圖</h3>
-                    <p class="text-stone-400 font-light leading-relaxed text-sm">專業水平校正與牆面材質評估，確保藝術品穩固且完美呈現。</p>
-                </div>
-                <!-- Service 3 -->
-                <div class="p-8 border border-stone-800 bg-stone-800/30 hover:bg-stone-800 transition-colors group reveal reveal-delay-200">
+                <div class="premium-card p-8 border border-stone-800 bg-stone-800/30 hover:bg-stone-800 transition-colors group reveal reveal-delay-100">
                     <div class="text-yellow-600 mb-6 group-hover:text-yellow-500 transition-colors">
                         <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
                     </div>
-                    <h3 class="text-xl font-serif font-semibold mb-3 tracking-wide">種類齊全</h3>
-                    <p class="text-stone-400 font-light leading-relaxed text-sm">從立體框、油畫框到拼圖框，數百種材質樣式滿足多元需求。</p>
+                    <div class="mb-3"><span class="text-yellow-700/70 text-xs tracking-widest">②</span><h3 class="text-xl font-serif font-semibold tracking-wide mt-1">多元框型</h3><p class="text-stone-500 text-xs tracking-[0.15em] uppercase mt-1">FRAME COLLECTIONS</p></div>
+                    <p class="text-stone-400 font-light leading-relaxed text-sm">提供上百種框型與材質自由搭配，滿足不同作品與空間風格需求，為每件作品找到最適合的呈現方式。</p>
                 </div>
-                <!-- Service 4 -->
-                <div class="p-8 border border-stone-800 bg-stone-800/30 hover:bg-stone-800 transition-colors group reveal">
+                <!-- Service 3 -->
+                <div class="premium-card p-8 border border-stone-800 bg-stone-800/30 hover:bg-stone-800 transition-colors group reveal reveal-delay-200">
                     <div class="text-yellow-600 mb-6 group-hover:text-yellow-500 transition-colors">
                         <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
                     </div>
-                    <h3 class="text-xl font-serif font-semibold mb-3 tracking-wide">展區活動代掛</h3>
-                    <p class="text-stone-400 font-light leading-relaxed text-sm">藝廊、博物館級別的佈展經驗，精準呈現策展人的視覺動線。</p>
+                    <div class="mb-3"><span class="text-yellow-700/70 text-xs tracking-widest">③</span><h3 class="text-xl font-serif font-semibold tracking-wide mt-1">展覽規劃</h3><p class="text-stone-500 text-xs tracking-[0.15em] uppercase mt-1">EXHIBITION PLANNING</p></div>
+                    <p class="text-stone-400 font-light leading-relaxed text-sm">從作品輸出、裱框到現場規劃，讓創作不只停留在畫面裡，更透過展覽與空間，被更多人看見。</p>
+                </div>
+                <!-- Service 4 -->
+                <div class="premium-card p-8 border border-stone-800 bg-stone-800/30 hover:bg-stone-800 transition-colors group reveal">
+                    <div class="text-yellow-600 mb-6 group-hover:text-yellow-500 transition-colors">
+                        <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25V2.46V2.45c0-.27.2-.5.49-.5h.42c.61 0 1.12.5 1.1.11L11.7 20.91c-.38-.38-.59-.88-.59-1.41v-.42c0-.29-.23-.49-.5-.49h-.01c-.85 0-1.65-.33-2.25-.93L7.1 16.4"/></svg>
+                    </div>
+                    <div class="mb-3"><span class="text-yellow-700/70 text-xs tracking-widest">④</span><h3 class="text-xl font-serif font-semibold tracking-wide mt-1">專業掛圖</h3><p class="text-stone-500 text-xs tracking-[0.15em] uppercase mt-1">ART INSTALLATION</p></div>
+                    <p class="text-stone-400 font-light leading-relaxed text-sm">從精準定位到比例配置，讓每件作品擁有恰到好處的呈現，創造更完整的視覺層次。</p>
                 </div>
                 <!-- Service 5 -->
-                <div class="p-8 border border-stone-800 bg-stone-800/30 hover:bg-stone-800 transition-colors group reveal reveal-delay-100">
+                <div class="premium-card p-8 border border-stone-800 bg-stone-800/30 hover:bg-stone-800 transition-colors group reveal reveal-delay-100">
                     <div class="text-yellow-600 mb-6 group-hover:text-yellow-500 transition-colors">
-                        <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" x2="14" y1="3" y2="10"/><line x1="3" x2="10" y1="21" y2="14"/></svg>
+                        <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V21a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21V12h6v9"/></svg>
                     </div>
-                    <h3 class="text-xl font-serif font-semibold mb-3 tracking-wide">大型活動工程</h3>
-                    <p class="text-stone-400 font-light leading-relaxed text-sm">承接大型商業空間、飯店、公共藝術的掛畫與安裝工程。</p>
+                    <div class="mb-3"><span class="text-yellow-700/70 text-xs tracking-widest">⑤</span><h3 class="text-xl font-serif font-semibold tracking-wide mt-1">空間美學</h3><p class="text-stone-500 text-xs tracking-[0.15em] uppercase mt-1">SPACE STYLING</p></div>
+                    <p class="text-stone-400 font-light leading-relaxed text-sm">讓藝術不只存在於畫廊，更自然地融入日常生活，為空間增添溫度，營造舒適且富有質感的生活氛圍。</p>
                 </div>
                 <!-- Service 6 -->
-                <div class="p-8 border border-stone-800 bg-stone-800/30 hover:bg-stone-800 transition-colors group reveal reveal-delay-200">
+                <div class="premium-card p-8 border border-stone-800 bg-stone-800/30 hover:bg-stone-800 transition-colors group reveal reveal-delay-200">
+                    <div class="text-yellow-600 mb-6 group-hover:text-yellow-500 transition-colors">
+                        <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" x2="2" y1="8" y2="22"/><line x1="17.5" x2="9" y1="15" y2="15"/></svg>
+                    </div>
+                    <div class="mb-3"><span class="text-yellow-700/70 text-xs tracking-widest">⑥</span><h3 class="text-xl font-serif font-semibold tracking-wide mt-1">風格規劃</h3><p class="text-stone-500 text-xs tracking-[0.15em] uppercase mt-1">LIFESTYLE DESIGN</p></div>
+                    <p class="text-stone-400 font-light leading-relaxed text-sm">結合室內設計、窗簾與軟裝搭配，透過專業夥伴合作與整合，為空間找到更適合的配置方式，打造一致且富有質感的生活風格。</p>
+                </div>
+                <!-- Service 7 -->
+                <div class="premium-card p-8 border border-stone-800 bg-stone-800/30 hover:bg-stone-800 transition-colors group reveal md:col-span-2 lg:col-span-1">
                     <div class="text-yellow-600 mb-6 group-hover:text-yellow-500 transition-colors">
                         <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     </div>
-                    <h3 class="text-xl font-serif font-semibold mb-3 tracking-wide">歡迎批發</h3>
-                    <p class="text-stone-400 font-light leading-relaxed text-sm">提供設計師、畫廊、攝影師穩定的高品質框材批發合作。</p>
+                    <div class="mb-3"><span class="text-yellow-700/70 text-xs tracking-widest">⑦</span><h3 class="text-xl font-serif font-semibold tracking-wide mt-1">材料供應</h3><p class="text-stone-500 text-xs tracking-[0.15em] uppercase mt-1">MATERIALS & WHOLESALE</p></div>
+                    <p class="text-stone-400 font-light leading-relaxed text-sm">提供畫框、相框材料與美術材料批發，與同為藝術產業的你們一同成長，秉持 FFF•INSTITUTE 精神，共同研究、持續進化，探索更多可能。</p>
                 </div>
             </div>
         </div>
@@ -229,20 +444,23 @@
     <section id="portfolio" class="py-20 md:py-32 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12 reveal">
-                <h2 class="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-4">精選案例</h2>
-                
+                <h3 class="text-yellow-700 text-xs font-bold tracking-[0.3em] mb-3 uppercase">Featured Works</h3>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-stone-900">精選作品</h2>
+
                 <!-- Filter Buttons -->
-                <div class="flex flex-wrap justify-center gap-4 mt-8" id="portfolio-filters">
+                <div class="flex flex-wrap justify-center gap-3 mt-10" id="portfolio-filters">
                     <button class="filter-btn active px-6 py-2 text-sm tracking-widest transition-all rounded-full bg-stone-900 text-white shadow-lg" data-filter="全部">全部</button>
-                    <button class="filter-btn px-6 py-2 text-sm tracking-widest transition-all rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200" data-filter="現代藝術">現代藝術</button>
-                    <button class="filter-btn px-6 py-2 text-sm tracking-widest transition-all rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200" data-filter="傳統書法">傳統書法</button>
-                    <button class="filter-btn px-6 py-2 text-sm tracking-widest transition-all rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200" data-filter="攝影作品">攝影作品</button>
-                    <button class="filter-btn px-6 py-2 text-sm tracking-widest transition-all rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200" data-filter="拼圖/海報">拼圖/海報</button>
+                    <button class="filter-btn px-6 py-2 text-sm tracking-widest transition-all rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200" data-filter="藝術創作">藝術創作</button>
+                    <button class="filter-btn px-6 py-2 text-sm tracking-widest transition-all rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200" data-filter="展覽策劃">展覽策劃</button>
+                    <button class="filter-btn px-6 py-2 text-sm tracking-widest transition-all rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200" data-filter="收藏紀念">收藏紀念</button>
+                    <button class="filter-btn px-6 py-2 text-sm tracking-widest transition-all rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200" data-filter="空間美學">空間美學</button>
+                    <button class="filter-btn px-6 py-2 text-sm tracking-widest transition-all rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200" data-filter="客製專案">客製專案</button>
                 </div>
             </div>
 
-            <!-- Portfolio Grid -->
-            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
+            <div id="portfolio-status" class="text-center text-stone-400 text-sm mb-8 hidden"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14" id="portfolio-grid">
                 <!-- Javascript will populate this -->
             </div>
         </div>
@@ -258,78 +476,128 @@
         <div class="container mx-auto px-6 relative z-10">
             <div class="flex flex-col lg:flex-row gap-16">
                 <div class="w-full lg:w-5/12 reveal">
-                    <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-6">
-                        開始您的<br>藝術之旅
+                    <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-8 leading-tight">
+                        開啟一場<br>屬於您的藝術探索之旅
                     </h2>
-                    <p class="text-stone-400 font-light leading-relaxed mb-10">
-                        有作品需要裝裱嗎？或是展覽需要協助？<br>
-                        歡迎填寫右側表單，或透過 Instagram 與我們聯繫。<br>
-                        我們會盡快安排專人為您服務。
+                    <p class="text-stone-400 font-light leading-loose mb-12">
+                        對裱框有疑問嗎？對空間搭配感到困惑嗎？或是對作品的呈現有更多想法？<br><br>
+                        無論是一件作品、一場展覽，還是一個理想中的空間，讓 FFF•INSTITUTE 與您一同探索更多可能，找到最適合的答案，讓藝術與生活彼此成就。
                     </p>
 
-                    <div class="space-y-6">
+                    <div class="space-y-8">
                         <div class="flex items-start gap-4">
-                            <svg class="w-6 h-6 text-yellow-600 mt-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <svg class="w-5 h-5 text-yellow-600 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                             <div>
-                                <h4 class="text-white font-serif mb-1">Studio Location</h4>
-                                <p class="text-stone-400 text-sm">台北市 (詳細地址請預約)</p>
+                                <h4 class="text-white text-sm tracking-wide mb-1.5">工作室位置</h4>
+                                <p class="text-stone-400 text-sm leading-relaxed">台中市大肚區文昌路三段一巷137號<br>採預約制</p>
                             </div>
                         </div>
-                        <div class="flex items-start gap-4">
-                            <svg class="w-6 h-6 text-yellow-600 mt-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+
+                        <a href="https://line.me/ti/p/6OjEXqP4j3" target="_blank" rel="noopener" class="flex items-start gap-4 group">
+                            <svg class="w-5 h-5 text-yellow-600 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
                             <div>
-                                <h4 class="text-white font-serif mb-1">Email Us</h4>
-                                <p class="text-stone-400 text-sm">contact@fff-institute.com</p>
-                            </div>
-                        </div>
-                        <a href="https://www.instagram.com/_fff.institute_/" target="_blank" class="flex items-center gap-4 group">
-                            <div class="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center group-hover:bg-gradient-to-tr from-yellow-500 to-purple-600 transition-all">
-                                <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-serif group-hover:text-yellow-500 transition-colors">Follow on Instagram</h4>
-                                <p class="text-stone-400 text-sm">@_fff.institute_</p>
+                                <h4 class="text-white text-sm tracking-wide mb-1.5 group-hover:text-yellow-500 transition-colors">LINE 諮詢</h4>
+                                <p class="text-stone-400 text-sm">@jeff222jeff</p>
                             </div>
                         </a>
+
+                        <a href="https://line.me/ti/g2/_CS2DnBfi94bXZbtGjvhPio5kfU5Ed5FOTlTHw?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener" class="flex items-start gap-4 group">
+                            <svg class="w-5 h-5 text-yellow-600 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <div>
+                                <h4 class="text-white text-sm tracking-wide mb-1.5 group-hover:text-yellow-500 transition-colors">VIP 社群</h4>
+                                <p class="text-stone-400 text-sm">FFF•INSTITUTE 框藝研究所 VIP 社群</p>
+                            </div>
+                        </a>
+
+                        <a href="https://www.instagram.com/_fff.institute_/" target="_blank" rel="noopener" class="flex items-start gap-4 group">
+                            <svg class="w-5 h-5 text-yellow-600 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                            <div>
+                                <h4 class="text-white text-sm tracking-wide mb-1.5 group-hover:text-yellow-500 transition-colors">Instagram</h4>
+                                <p class="text-stone-400 text-sm">_fff.institute_</p>
+                            </div>
+                        </a>
+
+                        <div class="flex items-start gap-4">
+                            <svg class="w-5 h-5 text-yellow-600 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                            <div>
+                                <h4 class="text-white text-sm tracking-wide mb-1.5">電子信箱</h4>
+                                <p class="text-stone-400 text-sm">as222as222as@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <svg class="w-5 h-5 text-yellow-600 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <div>
+                                <h4 class="text-white text-sm tracking-wide mb-1.5">服務時間</h4>
+                                <p class="text-stone-400 text-sm">MON – SAT｜09:00 – 18:00（依預約安排）</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="w-full lg:w-7/12 bg-white/5 p-8 md:p-12 backdrop-blur-sm border border-white/10 reveal reveal-delay-200">
-                    <form class="space-y-6">
+                    <form id="contact-form" class="space-y-7">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="space-y-2">
                                 <label class="text-xs uppercase tracking-widest text-stone-500">姓名</label>
-                                <input type="text" class="w-full bg-stone-800 border border-stone-700 p-3 text-white focus:outline-none focus:border-yellow-600 transition-colors" placeholder="您的稱呼">
+                                <input id="contact-name" type="text" class="w-full bg-stone-800 border border-stone-700 p-3 text-white focus:outline-none focus:border-yellow-600 transition-colors" placeholder="您的稱呼">
                             </div>
                             <div class="space-y-2">
                                 <label class="text-xs uppercase tracking-widest text-stone-500">電話</label>
-                                <input type="tel" class="w-full bg-stone-800 border border-stone-700 p-3 text-white focus:outline-none focus:border-yellow-600 transition-colors" placeholder="09xx-xxx-xxx">
+                                <input id="contact-phone" type="tel" class="w-full bg-stone-800 border border-stone-700 p-3 text-white focus:outline-none focus:border-yellow-600 transition-colors" placeholder="09xx-xxx-xxx">
                             </div>
                         </div>
-                        
+
                         <div class="space-y-2">
                             <label class="text-xs uppercase tracking-widest text-stone-500">需求類別</label>
-                            <select class="w-full bg-stone-800 border border-stone-700 p-3 text-white focus:outline-none focus:border-yellow-600 transition-colors">
-                                <option>個人裱框服務</option>
-                                <option>展覽代掛工程</option>
-                                <option>商業空間/大量批發</option>
-                                <option>其他合作諮詢</option>
+                            <select id="contact-category" class="w-full bg-stone-800 border border-stone-700 p-3 text-white focus:outline-none focus:border-yellow-600 transition-colors">
+                                <option>客製化裱框</option>
+                                <option>展覽規劃</option>
+                                <option>專業掛圖</option>
+                                <option>空間美學</option>
+                                <option>風格規劃</option>
+                                <option>材料供應</option>
+                                <option>客製專案</option>
+                                <option>其他需求</option>
                             </select>
                         </div>
 
                         <div class="space-y-2">
                             <label class="text-xs uppercase tracking-widest text-stone-500">訊息內容</label>
-                            <textarea rows="4" class="w-full bg-stone-800 border border-stone-700 p-3 text-white focus:outline-none focus:border-yellow-600 transition-colors" placeholder="請簡述您的作品尺寸、數量或特殊需求..."></textarea>
+                            <p class="text-stone-500 text-xs leading-relaxed mb-2">
+                                歡迎分享您的需求、作品尺寸或想法，讓我們一起探索更多可能。
+                            </p>
+                            <textarea id="contact-message" rows="4" class="w-full bg-stone-800 border border-stone-700 p-3 text-white focus:outline-none focus:border-yellow-600 transition-colors" placeholder="請簡述您的作品尺寸、數量或特殊需求..."></textarea>
                         </div>
 
-                        <button type="button" class="w-full bg-yellow-700 text-white py-4 font-bold tracking-widest hover:bg-yellow-600 transition-colors">
-                            發送諮詢
+                        <button id="contact-submit" type="submit" class="w-full bg-yellow-700 text-white py-4 font-bold tracking-widest hover:bg-yellow-600 transition-colors">
+                            預約諮詢
                         </button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
+
+
+    <!-- Portfolio Lightbox -->
+    <div id="lightbox" class="fixed inset-0 z-[80] bg-black/90 opacity-0 invisible flex items-center justify-center p-5 md:p-10" role="dialog" aria-modal="true" aria-label="作品圖片預覽">
+        <button id="lightbox-close" class="absolute top-5 right-5 md:top-8 md:right-8 text-white/80 hover:text-white" aria-label="關閉圖片預覽">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="max-w-6xl w-full text-center">
+            <img id="lightbox-image" src="" alt="" class="mx-auto w-auto max-w-full object-contain shadow-2xl">
+            <div class="mt-5 text-white">
+                <p id="lightbox-category" class="text-yellow-500 text-xs tracking-[.25em] uppercase"></p>
+                <h3 id="lightbox-title" class="font-serif text-2xl mt-2"></h3>
+                <p id="lightbox-subtitle" class="text-stone-400 text-sm mt-2"></p>
+            </div>
+        </div>
+    </div>
+
+    <a class="floating-line" href="https://line.me/ti/p/6OjEXqP4j3" target="_blank" rel="noopener" aria-label="使用 LINE 諮詢">
+        <span class="font-bold text-xs tracking-wide">LINE</span>
+    </a>
 
     <!-- Footer -->
     <footer class="bg-stone-950 text-stone-600 py-8 border-t border-stone-900">
@@ -344,18 +612,28 @@
 
     <!-- JavaScript for Logic -->
     <script>
-        // --- Data ---
-        const portfolioData = [
-            { id: 1, src: "image_d69221.png", category: "現代藝術", title: "金燦光芒・立體裱褙", subtitle: "複合媒材 / 金屬框" },
-            { id: 2, src: "image_d69317.png", category: "拼圖/海報", title: "梵谷星夜・色鉛筆風", subtitle: "畫紙 / 原木框" },
-            { id: 3, src: "image_d6961f.png", category: "傳統書法", title: "家和萬事興・匾額", subtitle: "書法 / 中式紫檀框" },
-            { id: 4, src: "image_d6969c.png", category: "攝影作品", title: "夕陽鹽田・攝影展", subtitle: "攝影 / 經典胡桃木" },
-            { id: 5, src: "image_d692db.png", category: "現代藝術", title: "抽象肌理・流金歲月", subtitle: "油畫 / 極簡金屬框" },
-            { id: 6, src: "image_d69643.png", category: "拼圖/海報", title: "夢幻島・千片拼圖", subtitle: "拼圖 / 白色簡約框" },
-            { id: 7, src: "image_d6963e.png", category: "現代藝術", title: "綻放・色彩層次", subtitle: "壓克力彩 / 懸浮框" },
-            { id: 8, src: "image_d69240.jpg", category: "傳統書法", title: "府城・書法裝裱", subtitle: "書法 / 雕花金框" },
-            { id: 9, src: "image_d69a3e.jpg", category: "攝影作品", title: "黑白光影・細節特寫", subtitle: "攝影 / 雙層卡紙" },
+        // ============================================================
+        // Portfolio data source: Google Sheet (published to web as CSV)
+        //
+        // 設定方式：
+        // 1. 在 Google 試算表建立欄位（第一列為標題）：image, category, title, subtitle
+        //    - image    : 圖片網址（可放圖床連結，例如 i.meee.com.tw 或 Google Drive 公開連結）
+        //    - category : 需為以下其中之一 -> 藝術創作 / 展覽策劃 / 收藏紀念 / 空間美學 / 客製專案
+        //    - title    : 作品標題
+        //    - subtitle : 作品副標（媒材／框型等）
+        // 2. 檔案 > 共用 > 發布到網路 > 選擇該工作表 > 格式選 csv > 發布，複製產生的網址
+        // 3. 貼到下面 SHEET_CSV_URL 這一行的引號中
+        // ============================================================
+        const SHEET_CSV_URL = ""; // <-- 請貼上「發布到網路」產生的 CSV 連結
+
+        // Fallback demo data (used only if SHEET_CSV_URL is empty or fetch fails)
+        const fallbackPortfolioData = [
+            { image: "image_d69221.png", category: "藝術創作", title: "金燦光芒・立體裱褙", subtitle: "複合媒材 / 金屬框" },
+            { image: "image_d6961f.png", category: "收藏紀念", title: "家和萬事興・匾額", subtitle: "書法 / 中式紫檀框" },
+            { image: "image_d6969c.png", category: "展覽策劃", title: "夕陽鹽田・攝影展", subtitle: "攝影 / 經典胡桃木" },
         ];
+
+        let portfolioData = [];
 
         // --- DOM Elements ---
         const navbar = document.getElementById('navbar');
@@ -366,7 +644,14 @@
         const iconMenu = document.getElementById('icon-menu');
         const iconClose = document.getElementById('icon-close');
         const portfolioGrid = document.getElementById('portfolio-grid');
+        const portfolioStatus = document.getElementById('portfolio-status');
         const filterBtns = document.querySelectorAll('.filter-btn');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxCategory = document.getElementById('lightbox-category');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxSubtitle = document.getElementById('lightbox-subtitle');
+        const lightboxClose = document.getElementById('lightbox-close');
 
         // --- Functions ---
 
@@ -376,25 +661,35 @@
         // 2. Navbar Scroll Effect
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
-                navbar.classList.add('bg-white/95', 'backdrop-blur-sm', 'shadow-md', 'py-4');
+                navbar.classList.add('bg-white/95', 'backdrop-blur-sm', 'shadow-md', 'py-4', 'is-scrolled');
                 navbar.classList.remove('bg-transparent', 'py-6');
-                brandLogo.classList.remove('md:text-white');
-                brandLogo.classList.add('text-stone-800');
+                mobileMenuBtn.classList.remove('text-white');
+                mobileMenuBtn.classList.add('text-stone-800');
                 navLinks.forEach(link => {
                     link.classList.remove('text-stone-200');
                     link.classList.add('text-stone-600');
                 });
             } else {
-                navbar.classList.remove('bg-white/95', 'backdrop-blur-sm', 'shadow-md', 'py-4');
+                navbar.classList.remove('bg-white/95', 'backdrop-blur-sm', 'shadow-md', 'py-4', 'is-scrolled');
                 navbar.classList.add('bg-transparent', 'py-6');
-                brandLogo.classList.add('md:text-white');
-                brandLogo.classList.remove('text-stone-800');
+                mobileMenuBtn.classList.add('text-white');
+                mobileMenuBtn.classList.remove('text-stone-800');
                 navLinks.forEach(link => {
                     link.classList.add('text-stone-200');
                     link.classList.remove('text-stone-600');
                 });
             }
         });
+
+
+        // Subtle hero image movement for a more premium feel
+        const heroImage = document.querySelector('section img[alt="藝術空間背景"]');
+        window.addEventListener('scroll', () => {
+            if (heroImage) {
+                const offset = Math.min(window.scrollY * 0.08, 55);
+                heroImage.style.transform = `translateY(${offset}px) scale(1.05)`;
+            }
+        }, { passive: true });
 
         // 3. Mobile Menu Toggle
         mobileMenuBtn.addEventListener('click', () => {
@@ -415,17 +710,24 @@
         // 4. Portfolio Rendering & Filtering
         function renderPortfolio(filter = "全部") {
             portfolioGrid.innerHTML = ''; // Clear existing
-            
-            const items = filter === "全部" 
-                ? portfolioData 
+
+            const items = filter === "全部"
+                ? portfolioData
                 : portfolioData.filter(item => item.category === filter);
+
+            if (items.length === 0) {
+                portfolioStatus.textContent = "目前尚無此分類的作品，敬請期待。";
+                portfolioStatus.classList.remove('hidden');
+            } else {
+                portfolioStatus.classList.add('hidden');
+            }
 
             items.forEach(item => {
                 const card = document.createElement('div');
-                card.className = "group cursor-pointer reveal"; // Added reveal class for animation
+                card.className = "group cursor-pointer reveal active"; // Added reveal class for animation
                 card.innerHTML = `
                     <div class="relative overflow-hidden aspect-[4/3] bg-stone-200">
-                        <img src="${item.src}" alt="${item.title}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                             <p class="text-white tracking-widest border border-white px-4 py-2 text-sm">查看詳情</p>
                         </div>
@@ -436,15 +738,78 @@
                         <p class="text-stone-500 text-sm mt-1 font-light">${item.subtitle}</p>
                     </div>
                 `;
+                card.addEventListener('click', () => openLightbox(item));
                 portfolioGrid.appendChild(card);
             });
-            
+
             // Re-trigger scroll animations for new elements
             observeElements();
         }
 
+        function openLightbox(item) {
+            lightboxImage.src = item.image;
+            lightboxImage.alt = item.title || '作品圖片';
+            lightboxCategory.textContent = item.category || '';
+            lightboxTitle.textContent = item.title || '';
+            lightboxSubtitle.textContent = item.subtitle || '';
+            lightbox.classList.add('is-visible');
+            document.body.classList.add('lightbox-open');
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('is-visible');
+            document.body.classList.remove('lightbox-open');
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (event) => {
+            if (event.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') closeLightbox();
+        });
+
+        // Contact form opens LINE with pre-filled consultation details
+        document.getElementById('contact-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const name = document.getElementById('contact-name').value.trim();
+            const phone = document.getElementById('contact-phone').value.trim();
+            const category = document.getElementById('contact-category').value;
+            const message = document.getElementById('contact-message').value.trim();
+            const text = `您好，我想預約 FFF•INSTITUTE 諮詢。\n姓名：${name || '未填'}\n電話：${phone || '未填'}\n需求：${category}\n內容：${message || '未填'}`;
+            window.open(`https://line.me/R/msg/text/?${encodeURIComponent(text)}`, '_blank', 'noopener');
+        });
+
+        // Load portfolio data from Google Sheet CSV, fallback to demo data
+        function loadPortfolioData() {
+            if (!SHEET_CSV_URL) {
+                portfolioData = fallbackPortfolioData;
+                portfolioStatus.textContent = "尚未連接 Google Sheet，目前顯示示範資料。";
+                portfolioStatus.classList.remove('hidden');
+                renderPortfolio();
+                return;
+            }
+
+            Papa.parse(SHEET_CSV_URL, {
+                download: true,
+                header: true,
+                skipEmptyLines: true,
+                complete: function(results) {
+                    const rows = (results.data || []).filter(r => r.title && r.image);
+                    portfolioData = rows.length > 0 ? rows : fallbackPortfolioData;
+                    renderPortfolio();
+                },
+                error: function() {
+                    portfolioData = fallbackPortfolioData;
+                    portfolioStatus.textContent = "無法讀取 Google Sheet，目前顯示示範資料。";
+                    portfolioStatus.classList.remove('hidden');
+                    renderPortfolio();
+                }
+            });
+        }
+
         // Initialize Portfolio
-        renderPortfolio();
+        loadPortfolioData();
 
         // Handle Filter Clicks
         filterBtns.forEach(btn => {
